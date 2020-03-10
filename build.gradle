@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        jcenter()
+
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+    }
+}
+
+plugins {
+    id 'war'
+    id 'org.gretty' version '2.2.0'
+}
+
+allprojects {
+    apply plugin: "com.jfrog.artifactory"
+}
+
+def springVersion = "5.2.2.RELEASE"
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url 'http://repo.spring.io/libs-release'}
+    mavenCentral()
+    maven { url 'http://oss.sonatype.org/content/groups/public'}
+    mavenLocal()
+}
+
+dependencies {
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile([
+            'org.springframework:spring-core:' + springVersion,
+            'org.springframework:spring-context:' + springVersion,
+            'org.springframework:spring-beans:' + springVersion,
+            'org.springframework:spring-test:' + springVersion
+    ])
+    testCompile group: 'junit' , name: 'junit', version: '4.12'
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+            repoKey = 'gradle-dev-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'gradle-dev'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+
+        }
+    }
+}
