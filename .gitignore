@@ -1,0 +1,12 @@
+**/bin/*
+**/build/*
+**/.idea/*
+**/.settings/*
+**/.gradle/*
+**/gradle/*
+.classpath
+.project
+.xml
+/.metadata/
+/.recommenders/
+/out/
