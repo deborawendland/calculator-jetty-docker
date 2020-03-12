@@ -42,6 +42,12 @@ dependencies {
     testCompile group: 'junit' , name: 'junit', version: '4.12'
 }
 
+jar {
+    manifest {
+        attributes 'CalculatorServlet': 'com.deborawendland.calculatorDocker.servlet.CalculatorServlet'
+    }
+}
+
 artifactory {
     contextUrl = "${artifactory_contextUrl}"
     publish {
