@@ -9,9 +9,13 @@ buildscript {
 }
 
 plugins {
+    id 'java'
     id 'war'
     id 'org.gretty' version '2.2.0'
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 allprojects {
     apply plugin: "com.jfrog.artifactory"
@@ -21,8 +25,6 @@ def springVersion = "5.2.2.RELEASE"
 
 group 'org.example'
 version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 repositories {
     maven { url 'http://repo.spring.io/libs-release'}
