@@ -25,9 +25,6 @@ allprojects {
 
 def springVersion = "5.2.2.RELEASE"
 
-group 'org.example'
-version '1.0-SNAPSHOT'
-
 repositories {
     maven { url 'http://repo.spring.io/libs-release'}
     mavenCentral()
