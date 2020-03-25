@@ -2,7 +2,7 @@
 **/build/*
 **/.idea/*
 **/.settings/*
-**/.gradle/*gra
+**/.gradle/*
 **/gradle/*
 .classpath
 .project
