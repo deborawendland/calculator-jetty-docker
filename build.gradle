@@ -14,14 +14,14 @@ buildscript {
         mavenCentral()*/
     }
     dependencies {
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.15.1"
     }
 }
 
 apply plugin: "com.jfrog.artifactory"
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'org.gretty' version '2.2.0'
+//apply plugin: 'org.gretty'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 
