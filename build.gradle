@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         jcenter()
-
     }
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
@@ -16,12 +15,12 @@ plugins {
     id 'maven'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 allprojects {
     apply plugin: "com.jfrog.artifactory"
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 def springVersion = "5.2.2.RELEASE"
 
@@ -43,12 +42,6 @@ dependencies {
     testCompile group: 'junit' , name: 'junit', version: '4.12'
 }
 
-jar {
-    manifest {
-        attributes 'CalculatorServlet': 'com.deborawendland.calculatorDocker.servlet.CalculatorServlet'
-    }
-}
-
 artifactory {
     contextUrl = "${artifactory_contextUrl}"
     publish {
@@ -59,15 +52,12 @@ artifactory {
             maven = true
         }
         defaults {
-            publications('mavenJava')
+            publications ('mavenJava')
         }
-        publishBuildInfo = true
-        publishArtifacts = true
-        publishPom = true
     }
     resolve {
         repository {
-            repoKey = 'gradle-dev'
+            repoKey = 'gradle-release'
             username = "${artifactory_user}"
             password = "${artifactory_password}"
             maven = true
@@ -75,3 +65,23 @@ artifactory {
         }
     }
 }
+
+artifactoryPublish {
+    dependsOn jar
+}
+
+jar {
+    manifest {
+        attributes 'CalculatorServlet': 'com.deborawendland.calculatorDocker.servlet.CalculatorServlet'
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact file("build/libs/calculator-jetty-docker.jar")
+
+        }
+    }
+}
+
