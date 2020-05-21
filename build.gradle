@@ -22,7 +22,7 @@ plugins {
     id 'maven-publish'
     id 'maven'
 }
-apply plugin: 'com.jfrog.artifactory'
+//apply plugin: 'com.jfrog.artifactory'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
