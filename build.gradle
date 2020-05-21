@@ -4,14 +4,6 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-/*        maven {
-            url "${artifactory_contextUrl}"
-            credentials {
-                username = "${artifactory_user}"
-                password = "${artifactory_password}"
-            }
-        }
-        mavenCentral()*/
     }
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.15.1"
@@ -21,7 +13,6 @@ buildscript {
 apply plugin: "com.jfrog.artifactory"
 apply plugin: 'java'
 apply plugin: 'war'
-//apply plugin: 'org.gretty'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 
@@ -76,8 +67,6 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            //artifact file("build/libs/calculator-jetty-docker.jar")
-
         }
     }
 }
@@ -91,43 +80,3 @@ jar {
         attributes 'CalculatorServlet': 'com.deborawendland.calculatorDocker.servlet.CalculatorServlet'
     }
 }
-/*
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.+')
-    }
-}
-allprojects {
-    apply plugin: 'java-library'
-    apply plugin: 'maven-publish'
-    apply plugin: 'com.jfrog.artifactory'
-    group = 'org.jfrog.example.gradle'
-    version = '1.0'
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-            }
-        }
-    }
-}
-
-artifactory {
-    contextUrl = "http://localhost:8081/artifactory"   //The base Artifactory URL if not overridden by the publisher/resolver
-    publish {
-        repository {
-            repoKey = 'lib-release-local'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-        }
-        defaults {
-            publications('mavenJava')
-            publishArtifacts = true
-            publishBuildInfo = true
-            publishPom = true
-        }
-    }
-}*/
