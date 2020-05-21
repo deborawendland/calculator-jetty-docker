@@ -18,13 +18,14 @@ buildscript {
     }
 }
 
+apply plugin: "com.jfrog.artifactory"
+
 plugins {
     id 'java'
     id 'war'
     id 'org.gretty' version '2.2.0'
     id 'maven-publish'
     id 'maven'
-    id 'com.jfrog.artifactory'
 }
 
 sourceCompatibility = 1.8
