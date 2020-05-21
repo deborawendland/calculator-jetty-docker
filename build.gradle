@@ -75,7 +75,8 @@ artifactory {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact file("build/libs/calculator-jetty-docker.jar")
+            from components.java
+            //artifact file("build/libs/calculator-jetty-docker.jar")
 
         }
     }
