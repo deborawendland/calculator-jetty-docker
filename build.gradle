@@ -15,9 +15,9 @@ plugins {
     id 'maven'
 }
 
-allprojects {
+/*allprojects {
     apply plugin: "com.jfrog.artifactory"
-}
+}*/
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
