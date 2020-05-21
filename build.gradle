@@ -1,14 +1,14 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
+/*        maven {
             url "${artifactory_contextUrl}"
             credentials {
                 username = "${artifactory_user}"
                 password = "${artifactory_password}"
             }
         }
-        mavenCentral()
+        mavenCentral()*/
     }
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
@@ -21,8 +21,8 @@ plugins {
     id 'org.gretty' version '2.2.0'
     id 'maven-publish'
     id 'maven'
+    id 'com.jfrog.artifactory'
 }
-apply plugin: 'com.jfrog.artifactory'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -89,4 +89,43 @@ jar {
         attributes 'CalculatorServlet': 'com.deborawendland.calculatorDocker.servlet.CalculatorServlet'
     }
 }
+/*
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.+')
+    }
+}
+allprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.artifactory'
+    group = 'org.jfrog.example.gradle'
+    version = '1.0'
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}
 
+artifactory {
+    contextUrl = "http://localhost:8081/artifactory"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'lib-release-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+        defaults {
+            publications('mavenJava')
+            publishArtifacts = true
+            publishBuildInfo = true
+            publishPom = true
+        }
+    }
+}*/
