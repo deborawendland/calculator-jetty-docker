@@ -1,6 +1,14 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "${artifactory_contextUrl}"
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+        mavenCentral()
     }
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
@@ -14,10 +22,7 @@ plugins {
     id 'maven-publish'
     id 'maven'
 }
-
-allprojects {
-    apply plugin: "com.jfrog.artifactory"
-}
+apply plugin: 'com.jfrog.artifactory'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -66,6 +71,15 @@ artifactory {
     }
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact file("build/libs/calculator-jetty-docker.jar")
+
+        }
+    }
+}
+
 artifactoryPublish {
     dependsOn jar
 }
@@ -73,15 +87,6 @@ artifactoryPublish {
 jar {
     manifest {
         attributes 'CalculatorServlet': 'com.deborawendland.calculatorDocker.servlet.CalculatorServlet'
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact file("build/libs/calculator-jetty-docker.jar")
-
-        }
     }
 }
 
