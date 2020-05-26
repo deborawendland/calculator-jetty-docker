@@ -72,7 +72,7 @@ publishing {
 }
 
 artifactoryPublish {
-    dependsOn jar
+    dependsOn war
 }
 
 jar {
